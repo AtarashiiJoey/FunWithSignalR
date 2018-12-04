@@ -1,10 +1,9 @@
-﻿using System;
+﻿using FunWithSignalR.Models;
+using Microsoft.AspNet.SignalR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNet.SignalR;
-using FunWithSignalR.Models;
 
 namespace FunWithSignalR.Hubs
 {
@@ -24,7 +23,7 @@ namespace FunWithSignalR.Hubs
                     {
                         Clients.Clients(new List<string> { Context.ConnectionId, pmConnection.ConnectionId }).UpdateChat(userName, message, true);
                         return;
-                    }   
+                    }
                 }
             }
 
@@ -54,7 +53,7 @@ namespace FunWithSignalR.Hubs
                 {
                     // Check if there if a connection for the specified user name have ever been made
                     var existingConnection = db.Connections.Where(x => x.UserName.ToLower() == userName.ToLower()).SingleOrDefault();
-                    
+
                     if (existingConnection != null)
                     {
                         // If there's an old connection only the connection id and the online status are changed.
